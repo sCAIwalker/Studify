@@ -1,0 +1,30 @@
+{
+  "name": "studify",
+  "version": "1.0.0",
+  "description": "Studify",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "bcryptjs": "*",
+    "cors": "*",
+    "jsonwebtoken": "*",
+    "body-parser": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sCAIwalker/Studify.git"
+  },
+  "author": "Kevin Cai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sCAIwalker/Studify/issues"
+  },
+  "homepage": "https://github.com/sCAIwalker/Studify#readme"
+}
