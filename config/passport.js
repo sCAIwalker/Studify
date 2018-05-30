@@ -4,13 +4,15 @@ const User = require('../models/user');
 const config = require('../config/database');
 
 module.exports = function(passport) {
+    console.log("hi1");
     let opts = {};
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
     opts.secretOrKey = config.secret;
+    console.log("hi");
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+        console.log("hi2");
         console.log(jwt_payload);
-        console.log("hi");
-        User.getUserById(jwt_payload._id, (err, user) => {
+        User.getUserById(jwt_payload.data._id, (err, user) => {
             if (err) {
                 return done(err, false);
             }
