@@ -11,6 +11,7 @@ mongoose.connect(config.database);
 
 mongoose.connection.on('connected', () => {
 	console.log("connected to database " + config.database);
+	console.log("hi");
 });
 
 mongoose.connection.on('error', (err) => {
