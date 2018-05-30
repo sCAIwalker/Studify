@@ -6,7 +6,7 @@ const config = require('../config/database');
 module.exports = function(passport) {
     console.log("hi1");
     let opts = {};
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
     opts.secretOrKey = config.secret;
     console.log("hi");
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
