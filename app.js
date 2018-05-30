@@ -11,7 +11,6 @@ mongoose.connect(config.database);
 
 mongoose.connection.on('connected', () => {
 	console.log("connected to database " + config.database);
-	console.log("hi");
 });
 
 mongoose.connection.on('error', (err) => {
@@ -33,6 +32,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Body Parser
 app.use(bodyParser.json());
+
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
 
 // anything that is 3000/users/whatever will go to the users file
 app.use('/users', users);
