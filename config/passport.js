@@ -12,7 +12,7 @@ module.exports = function(passport) {
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
         console.log("hi2");
         console.log(jwt_payload);
-        User.getUserById(jwt_payload.data._id, (err, user) => {
+        User.getUserById(jwt_payload._id, (err, user) => {
             if (err) {
                 return done(err, false);
             }
