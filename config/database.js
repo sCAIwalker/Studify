@@ -1,4 +1,4 @@
 module.exports = {
-	database: 'mongodb://localhost:27017/studify',
+	database: 'mongodb://<dbuser>:<dbpassword>@ds245210.mlab.com:45210/studify',
 	secret: 'yoursecret'
 }
