@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   username: String;
   email: String;
   password: String;
+  spotifyAccount: String;
 
   constructor(private validateService: ValidateService, private flashMessage: FlashMessagesService, private authService: AuthService, private router: Router) { }
 
@@ -27,7 +28,8 @@ export class RegisterComponent implements OnInit {
       name: this.name,
       email: this.email,
       username: this.username,
-      password: this.password
+      password: this.password,
+      spotifyAccount: this.spotifyAccount 
     }
 
     // Required Fields
