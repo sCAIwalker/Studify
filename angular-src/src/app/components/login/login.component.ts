@@ -31,19 +31,13 @@ export class LoginComponent implements OnInit {
         this.flashMessage.show("You are now logged in!", {
           cssClass: 'alert-success', 
           timeout: 5000});
-          console.log("before spotify");          
-          console.log("after spotify");
+          window.location.href="http://localhost:3000/users/spotifyLogin";
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger', 
           timeout: 5000});
         this.router.navigate(['login']);
       }
-    });
-
-    this.authService.authenticateSpotifyAccount().subscribe((data:any) => {
-      console.log("hi");
-      console.log(data);
-    });
+    });        
   }
 }

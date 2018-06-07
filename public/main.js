@@ -256,7 +256,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\n  <h1>Studify</h1>\n    <p class=\"lead\">Welcome to Studify</p>\n    <div>\n      <a class=\"btn btn-primary\" [routerLink]=\"['/register']\">Register</a><a class=\"btn btn-default\" [routerLink]=\"['/login']\">Login</a>\n    </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Express Backend</h3>\n    <p>A rock solid</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Angular-CLI</h3>\n    <p>Angular-CLI to generate components, services, and more</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>JWT Tokens</h3>\n  </div>  \n</div>"
+module.exports = "<div class=\"jumbotron text-center\">\n  <h1>Studify</h1>\n    <p class=\"lead\">Welcome to Studify</p>\n    <div>\n      Create and account to get Started!\n    </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Playlist Conversion</h3>\n    <p>Convert your spotify playlist to a playlist without instrumentals when you're not feeling the lyrics!</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Background Effects</h3>\n    <p>Add a crackling fire or peaceful rainfall to the backdrop of your music to set the mood!</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Playlist Generation</h3>\n    <p>Getting bored with your current playlist? We'll generate a playlist for you at the click of a button!</p>\n  </div>  \n</div>"
 
 /***/ }),
 
@@ -379,8 +379,7 @@ var LoginComponent = /** @class */ (function () {
                     cssClass: 'alert-success',
                     timeout: 5000
                 });
-                console.log("before spotify");
-                console.log("after spotify");
+                window.location.href = "http://localhost:3000/users/spotifyLogin";
             }
             else {
                 _this.flashMessage.show(data.msg, {
@@ -389,10 +388,6 @@ var LoginComponent = /** @class */ (function () {
                 });
                 _this.router.navigate(['login']);
             }
-        });
-        this.authService.authenticateSpotifyAccount().subscribe(function (data) {
-            console.log("hi");
-            console.log(data);
         });
     };
     LoginComponent = __decorate([
@@ -587,7 +582,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Spotify Username</label>\n    <input type=\"password\" [(ngModel)]=\"spotifyAccount\" name=\"spotifyAccount\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n</form>\n"
+module.exports = "<h2 class=\"page-header\">Register</h2>\n<form (submit)=\"onRegisterSubmit()\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"name\" name=\"name\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Username</label>\n    <input type=\"text\" [(ngModel)]=\"username\" name=\"username\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Email</label>\n    <input type=\"text\" [(ngModel)]=\"email\" name=\"email\" class=\"form-control\">\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input type=\"password\" [(ngModel)]=\"password\" name=\"password\" class=\"form-control\">\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Submit\">\n</form>\n"
 
 /***/ }),
 

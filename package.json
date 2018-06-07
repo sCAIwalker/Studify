@@ -17,7 +17,8 @@
     "method-override": "^2.3.10",
     "mongoose": "*",
     "passport": "*",
-    "passport-jwt": "*"
+    "passport-jwt": "*",
+    "request": "^2.87.0"
   },
   "repository": {
     "type": "git",
