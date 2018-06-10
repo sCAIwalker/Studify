@@ -8,10 +8,6 @@ const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 var request = require('request');
-
-router.get('/test', (req, res, next) => {
-	console.log("in music router");
-	res.send("music");
-});
+const fs = require('fs');
 
 module.exports = router

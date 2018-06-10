@@ -6,7 +6,6 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database')
 const cors = require('cors');
-const fs = require('fs');
 
 // Connect to database
 mongoose.connect(config.database);
