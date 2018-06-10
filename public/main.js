@@ -354,7 +354,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  music works!\n</p>\n<iframe src=\"https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>\n<a href=\"http://localhost:3000/music/vibes?id=rain.mp3\" target=\"_blank\"> <button class=\"btn btn-success\"> Play </button>\t</a> <hr>\n<a href=\"http://localhost:3000/music/download?id=rain.mp3\"  target=\"_blank\"> <button class=\"btn btn-success\"> Download </button> </a>\n"
+module.exports = "<iframe src=\"https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>\n<hr>\n<audio controls>\n  <source src=\"/assets/rain.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/rain.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>"
 
 /***/ }),
 
