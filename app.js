@@ -6,6 +6,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database')
 const cors = require('cors');
+const fs = require('fs');
 
 // Connect to database
 mongoose.connect(config.database);
@@ -21,6 +22,7 @@ mongoose.connection.on('error', (err) => {
 const app = express();
 
 const users = require('./routes/users');
+const music = require('./routes/music');
 
 // Port Number
 const port = process.env.PORT || 3000;
@@ -47,6 +49,9 @@ require('./config/passport')(passport);
 
 // anything that is 3000/users/whatever will go to the users file
 app.use('/users', users);
+
+//anything that is 3000/music/whatever will go to the music file
+app.use('/music', music);
 
 // Home Page
 app.get('/', (req, res) => {

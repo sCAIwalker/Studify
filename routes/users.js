@@ -102,11 +102,7 @@ router.get('/test', (req, res, next) => {
 router.get('/spotifyLogin', (req, res) => {
 
 	var state = generateRandomString(16);
-	res.cookie(stateKey, state);
-
-	// res.header('Access-Control-Allow-Origin', '*');
-    // res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');	
+	res.cookie(stateKey, state);	
 	
 	console.log("/spotifyLogin");
 	// your application requests authorization
