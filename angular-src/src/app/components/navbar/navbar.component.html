@@ -16,7 +16,10 @@
         <a class="nav-link" [routerLink]="['/register']">Register Me</a>
       </li>
       <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a class="nav-link" [routerLink]="['/music']">Play Your Music</a>
+        <a class="nav-link" [routerLink]="['/music']">Music with Background Noise</a>
+      </li>
+      <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <a class="nav-link" [routerLink]="['/convert']">Convert Your Music</a>
       </li>
       <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
         <a class="nav-link" [routerLink]="['/profile']">Profile</a>

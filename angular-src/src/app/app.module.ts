@@ -15,6 +15,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { MusicComponent } from './components/music/music.component';
+import { ConvertComponent } from './components/convert/convert.component';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    MusicComponent
+    MusicComponent,
+    ConvertComponent
   ],
   imports: [
     BrowserModule,
