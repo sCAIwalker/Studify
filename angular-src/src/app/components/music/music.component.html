@@ -1,18 +1,23 @@
-<iframe src="https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+<!-- <iframe src="https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
 <hr>
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Choose Background Effects
+    Choose Effects
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+    <a class="dropdown-item" (click)="clickedRain()">Rain</a>
+    <a class="dropdown-item" (click)="clickedFireplace()">Fireplace</a>    
   </div>
 </div>
 <hr>
-<audio controls loop="true">
+<audio *ngIf="showRain"  controls loop="true">
   <source src="/assets/thunderstorm.mp3" type="audio/mp3">
   <source src="/assets/thunderstorm.mp3" type="audio/mpeg">    
 If you are reading this, your browser does not support the audio element.
 </audio>
+<audio *ngIf="showFireplace"  controls loop="true">
+  <source src="/assets/fireplace.mp3" type="audio/mp3">
+  <source src="/assets/fireplace.mp3" type="audio/mpeg">    
+If you are reading this, your browser does not support the audio element.
+</audio>
+
