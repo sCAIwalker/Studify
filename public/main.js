@@ -420,7 +420,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <iframe src=\"https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe> -->\n<hr>\n<div class=\"dropdown\">\n  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    Choose Effects\n  </button>\n  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n    <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n    <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n\n"
+module.exports = "<iframe src=\"https://open.spotify.com/embed/user/kevintheckuke/playlist/5iYP1LykgzGFKcBOXeGJkO\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe><div class=\"dropdown\">\n  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    Choose Effects\n  </button>\n  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n    <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n    <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n\n"
 
 /***/ }),
 
@@ -993,7 +993,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/kevin/Documents/Studify/angular-src/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/chengyuan.cai/Documents/Studify/angular-src/src/main.ts */"./src/main.ts");
 
 
 /***/ })
