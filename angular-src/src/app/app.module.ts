@@ -11,6 +11,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { MusicService } from './services/music.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, MusicService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

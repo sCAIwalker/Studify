@@ -48,10 +48,11 @@ router.get('/userPlaylist', (req, res, next) => {
     request.get(options, (error, response, body) => {
         if (!error && response.statusCode === 200) {
             console.log(body.items[0].name);
+            res.json(body);
         } else {
             console.log(error);
+            res.json({success : false});
         }
-        res.redirect('/#');
     });
 });
 

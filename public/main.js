@@ -103,12 +103,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./services/validate.service */ "./src/app/services/validate.service.ts");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
-/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
-/* harmony import */ var _components_music_music_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/music/music.component */ "./src/app/components/music/music.component.ts");
-/* harmony import */ var _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/convert/convert.component */ "./src/app/components/convert/convert.component.ts");
+/* harmony import */ var _services_music_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./services/music.service */ "./src/app/services/music.service.ts");
+/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
+/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
+/* harmony import */ var _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/music/music.component */ "./src/app/components/music/music.component.ts");
+/* harmony import */ var _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/convert/convert.component */ "./src/app/components/convert/convert.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -132,12 +133,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var appRoutes = [
     { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"] },
     { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"] },
     { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_5__["LoginComponent"] },
-    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_8__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'music', component: _components_music_music_component__WEBPACK_IMPORTED_MODULE_15__["MusicComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] }
+    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_8__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]] },
+    { path: 'music', component: _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__["MusicComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -151,17 +153,17 @@ var AppModule = /** @class */ (function () {
                 _components_register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"],
                 _components_home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"],
                 _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_8__["ProfileComponent"],
-                _components_music_music_component__WEBPACK_IMPORTED_MODULE_15__["MusicComponent"],
-                _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_16__["ConvertComponent"]
+                _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__["MusicComponent"],
+                _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_17__["ConvertComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(appRoutes),
-                angular2_flash_messages__WEBPACK_IMPORTED_MODULE_12__["FlashMessagesModule"].forRoot(),
+                angular2_flash_messages__WEBPACK_IMPORTED_MODULE_13__["FlashMessagesModule"].forRoot(),
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_13__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"]
             ],
-            providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_10__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]],
+            providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_10__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _services_music_service__WEBPACK_IMPORTED_MODULE_12__["MusicService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
     ], AppModule);
@@ -420,7 +422,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <iframe src=\"https://open.spotify.com/embed?uri=spotify:album:1DFixLWuPkv3KT3TnV35m3\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe> -->\n<hr>\n<div class=\"dropdown\">\n  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    Choose Effects\n  </button>\n  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n    <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n    <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n\n"
+module.exports = "<iframe src=\"https://embed.spotify.com/?uri=spotify:user:128899670:playlist:5NtjgKz4doejP5HJtKXFcS\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe><hr>\n<div class=\"dropdown\">\n  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    Choose Effects\n  </button>\n  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n    <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n    <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n\n"
 
 /***/ }),
 
@@ -435,6 +437,7 @@ module.exports = "<!-- <iframe src=\"https://open.spotify.com/embed?uri=spotify:
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MusicComponent", function() { return MusicComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_music_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/music.service */ "./src/app/services/music.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -445,10 +448,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var MusicComponent = /** @class */ (function () {
-    function MusicComponent() {
+    function MusicComponent(musicService) {
+        this.musicService = musicService;
     }
     MusicComponent.prototype.ngOnInit = function () {
+        this.musicService.getUserPlaylists().subscribe(function (data) {
+            console.log(data);
+        });
     };
     MusicComponent.prototype.clickedRain = function () {
         console.log("rain");
@@ -466,7 +474,7 @@ var MusicComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./music.component.html */ "./src/app/components/music/music.component.html"),
             styles: [__webpack_require__(/*! ./music.component.css */ "./src/app/components/music/music.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_music_service__WEBPACK_IMPORTED_MODULE_1__["MusicService"]])
     ], MusicComponent);
     return MusicComponent;
 }());
@@ -861,11 +869,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.loggedIn = function () {
         return !this.helper.isTokenExpired(localStorage.getItem("id_token"));
     };
-    AuthService.prototype.callSpotify = function () {
-        //4220f98a90dd428cb79a258b78fbe43d
-        console.log("callSpotifyAuth");
-        this.http.get('http://localhost:3000/users/spotifyLogin');
-    };
+    //4220f98a90dd428cb79a258b78fbe43d
     AuthService.prototype.logout = function () {
         this.authToken = null;
         this.user = null;
@@ -878,6 +882,54 @@ var AuthService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/music.service.ts":
+/*!*******************************************!*\
+  !*** ./src/app/services/music.service.ts ***!
+  \*******************************************/
+/*! exports provided: MusicService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MusicService", function() { return MusicService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MusicService = /** @class */ (function () {
+    function MusicService(http) {
+        this.http = http;
+    }
+    MusicService.prototype.getUserPlaylists = function () {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+            'Content-Type': 'application/json'
+        });
+        return this.http.get('http://localhost:3000/music/userPlaylist', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+    };
+    MusicService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], MusicService);
+    return MusicService;
 }());
 
 

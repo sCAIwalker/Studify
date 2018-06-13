@@ -59,12 +59,8 @@ export class AuthService {
     return !this.helper.isTokenExpired(localStorage.getItem("id_token"));
   }
 
-  callSpotify() {
-    //4220f98a90dd428cb79a258b78fbe43d
-    console.log("callSpotifyAuth");
-    this.http.get('http://localhost:3000/users/spotifyLogin');
-  }
-
+  
+  //4220f98a90dd428cb79a258b78fbe43d
   logout() {
     this.authToken = null;
     this.user = null;
