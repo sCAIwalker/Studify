@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { MusicComponent } from './components/music/music.component';
 import { ConvertComponent } from './components/convert/convert.component';
+import { UrlbypassPipe } from './pipes/urlbypass.pipe';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     HomeComponent,
     ProfileComponent,
     MusicComponent,
-    ConvertComponent
+    ConvertComponent,
+    UrlbypassPipe
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [ValidateService, AuthService, MusicService, AuthGuard],
+  providers: [ValidateService, AuthService, MusicService, AuthGuard, UrlbypassPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

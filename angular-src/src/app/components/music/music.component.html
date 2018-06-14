@@ -1,12 +1,15 @@
-<iframe src="https://open.spotify.com/embed/user/kevintheckuke/playlist/5iYP1LykgzGFKcBOXeGJkO" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><div class="dropdown">
+<iframe *ngIf="playlistSelected" [src]="embedURI" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><div class="dropdown">
+  <button *ngIf="!playlistDisplayed" (click)="displayPlaylist()" class="btn btn-success">Choose Your Playlist</button>
+  <ul *ngIf="playlistDisplayed" class="list-group">
+      <li *ngFor="let playlist of playlists" (click)="onPlaylistSelect(playlist)" class="list-group-item">{{playlist.name}}</li>
+  </ul>
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Choose Effects
+      Choose Effects
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" (click)="clickedRain()">Rain</a>
-    <a class="dropdown-item" (click)="clickedFireplace()">Fireplace</a>    
+      <a class="dropdown-item" (click)="clickedRain()">Rain</a>
+      <a class="dropdown-item" (click)="clickedFireplace()">Fireplace</a>    
   </div>
-</div>
 <hr>
 <audio *ngIf="showRain"  controls loop="true">
   <source src="/assets/thunderstorm.mp3" type="audio/mp3">
