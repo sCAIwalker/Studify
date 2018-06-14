@@ -12,10 +12,10 @@ export class MusicComponent implements OnInit {
   showRain : boolean;
   showFireplace : boolean;
   playlists : any;
-  playlistDisplayed : boolean = false;
   playlistSelected : boolean = false;
   selected : any;
   embedURI : any;
+  placeholder : string = "Choose Effects";
 
   constructor(private musicService: MusicService, private urlbypassPipe: UrlbypassPipe) { }
 
@@ -30,17 +30,15 @@ export class MusicComponent implements OnInit {
     console.log("rain");
     this.showRain = true;
     this.showFireplace = false;
+    this.placeholder = "Rain";
   }
 
   clickedFireplace() {
     console.log("fireplace");
     this.showRain = false;
     this.showFireplace = true;
+    this.placeholder = "Fireplace";
     console.log(this.selected);
-  }
-
-  displayPlaylist() {
-    this.playlistDisplayed = true;
   }
 
   onPlaylistSelect(playlist) {
@@ -49,7 +47,6 @@ export class MusicComponent implements OnInit {
     this.embedURI = "https://open.spotify.com/embed?uri=" + this.selected.uri;
     this.embedURI = this.urlbypassPipe.transform(this.embedURI);
     console.log(this.embedURI);
-    this.playlistDisplayed = false;
     this.playlistSelected = true;
   }
 }
