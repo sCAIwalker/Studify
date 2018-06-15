@@ -21,8 +21,10 @@ router.post('/register', (req, res, next) => {
 
 	User.addUser(newUser, (err, user) => {
 		if (err) {
+			console.log(err);
 			res.json({success: false, msg:'failed to register user'});
 		} else {
+			console.log("We made it");
 			res.json({success: true, msg:'user registered'});
 		}
 	});
