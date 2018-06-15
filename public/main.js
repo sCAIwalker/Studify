@@ -110,12 +110,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
 /* harmony import */ var _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/music/music.component */ "./src/app/components/music/music.component.ts");
 /* harmony import */ var _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/convert/convert.component */ "./src/app/components/convert/convert.component.ts");
+/* harmony import */ var _pipes_urlbypass_pipe__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pipes/urlbypass.pipe */ "./src/app/pipes/urlbypass.pipe.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -154,7 +156,8 @@ var AppModule = /** @class */ (function () {
                 _components_home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"],
                 _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_8__["ProfileComponent"],
                 _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__["MusicComponent"],
-                _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_17__["ConvertComponent"]
+                _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_17__["ConvertComponent"],
+                _pipes_urlbypass_pipe__WEBPACK_IMPORTED_MODULE_18__["UrlbypassPipe"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -163,7 +166,7 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"]
             ],
-            providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_10__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _services_music_service__WEBPACK_IMPORTED_MODULE_12__["MusicService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]],
+            providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_10__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _services_music_service__WEBPACK_IMPORTED_MODULE_12__["MusicService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"], _pipes_urlbypass_pipe__WEBPACK_IMPORTED_MODULE_18__["UrlbypassPipe"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
     ], AppModule);
@@ -422,7 +425,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<iframe src=\"https://open.spotify.com/embed/user/kevintheckuke/playlist/5iYP1LykgzGFKcBOXeGJkO\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe><div class=\"dropdown\">\n  <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    Choose Effects\n  </button>\n  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n    <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n    <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n\n"
+module.exports = "<iframe *ngIf=\"playlistSelected\" [src]=\"embedURI\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe><div class=\"dropdown\">\n  <!-- <button *ngIf=\"!playlistDisplayed\" (click)=\"displayPlaylist()\" class=\"btn btn-success\">Choose Your Playlist</button> -->\n  <!-- <ul *ngIf=\"playlistDisplayed\" class=\"list-group\">\n      <li *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\" class=\"list-group-item\">{{playlist.name}}</li>\n  </ul> -->\n<div class=\"btn-group\">\n  <div class=\"dropdown\">\n      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        Choose Your Playlist\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n      </div>\n    </div>\n  <div class=\"dropdown\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        {{placeholder}}\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n        <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n    </div>\n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n"
 
 /***/ }),
 
@@ -438,6 +441,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MusicComponent", function() { return MusicComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_music_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/music.service */ "./src/app/services/music.service.ts");
+/* harmony import */ var _pipes_urlbypass_pipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../pipes/urlbypass.pipe */ "./src/app/pipes/urlbypass.pipe.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -449,24 +453,41 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var MusicComponent = /** @class */ (function () {
-    function MusicComponent(musicService) {
+    function MusicComponent(musicService, urlbypassPipe) {
         this.musicService = musicService;
+        this.urlbypassPipe = urlbypassPipe;
+        this.playlistSelected = false;
+        this.placeholder = "Choose Effects";
     }
     MusicComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.musicService.getUserPlaylists().subscribe(function (data) {
             console.log(data);
+            _this.playlists = data;
         });
     };
     MusicComponent.prototype.clickedRain = function () {
         console.log("rain");
         this.showRain = true;
         this.showFireplace = false;
+        this.placeholder = "Rain";
     };
     MusicComponent.prototype.clickedFireplace = function () {
         console.log("fireplace");
         this.showRain = false;
         this.showFireplace = true;
+        this.placeholder = "Fireplace";
+        console.log(this.selected);
+    };
+    MusicComponent.prototype.onPlaylistSelect = function (playlist) {
+        console.log(playlist);
+        this.selected = playlist;
+        this.embedURI = "https://open.spotify.com/embed?uri=" + this.selected.uri;
+        this.embedURI = this.urlbypassPipe.transform(this.embedURI);
+        console.log(this.embedURI);
+        this.playlistSelected = true;
     };
     MusicComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -474,7 +495,7 @@ var MusicComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./music.component.html */ "./src/app/components/music/music.component.html"),
             styles: [__webpack_require__(/*! ./music.component.css */ "./src/app/components/music/music.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_music_service__WEBPACK_IMPORTED_MODULE_1__["MusicService"]])
+        __metadata("design:paramtypes", [_services_music_service__WEBPACK_IMPORTED_MODULE_1__["MusicService"], _pipes_urlbypass_pipe__WEBPACK_IMPORTED_MODULE_2__["UrlbypassPipe"]])
     ], MusicComponent);
     return MusicComponent;
 }());
@@ -583,7 +604,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"user\">\n  <h2 class=\"page=header\">{{user.name}}</h2>\n  <ul class=\"list-group\"></ul>\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n\n</div>\n"
+module.exports = "<div *ngIf=\"user\">\n  <h2 class=\"page=header\">{{user.name}}</h2>\n  <ul class=\"list-group\"></ul>\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n</div>\n"
 
 /***/ }),
 
@@ -799,6 +820,49 @@ var AuthGuard = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/pipes/urlbypass.pipe.ts":
+/*!*****************************************!*\
+  !*** ./src/app/pipes/urlbypass.pipe.ts ***!
+  \*****************************************/
+/*! exports provided: UrlbypassPipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UrlbypassPipe", function() { return UrlbypassPipe; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var UrlbypassPipe = /** @class */ (function () {
+    function UrlbypassPipe(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    UrlbypassPipe.prototype.transform = function (url) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    };
+    UrlbypassPipe = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
+            name: 'urlbypass'
+        }),
+        __metadata("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])
+    ], UrlbypassPipe);
+    return UrlbypassPipe;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/auth.service.ts":
 /*!******************************************!*\
   !*** ./src/app/services/auth.service.ts ***!
@@ -835,17 +899,18 @@ var AuthService = /** @class */ (function () {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('http://localhost:3000/users/register', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        // 'http://localhost:3000/users/register'
+        return this.http.post('users/register', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('users/authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.authenticateSpotifyAccount = function () {
         console.log("in auth.service");
-        return this.http.get('http://localhost:3000/users/spotifyLogin');
+        return this.http.get('users/spotifyLogin');
     };
     AuthService.prototype.getProfile = function () {
         this.loadToken();
@@ -854,7 +919,7 @@ var AuthService = /** @class */ (function () {
             'Authorization': this.authToken,
             'Content-Type': 'application/json'
         });
-        return this.http.get('http://localhost:3000/users/profile', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.get('users/profile', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.storeUserData = function (token, user) {
         localStorage.setItem('id_token', token);
@@ -921,7 +986,7 @@ var MusicService = /** @class */ (function () {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.get('http://localhost:3000/music/userPlaylist', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.get('music/userPlaylist', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     MusicService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1045,7 +1110,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/kevin/Documents/Studify/angular-src/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/chengyuan.cai/Documents/Studify/angular-src/src/main.ts */"./src/main.ts");
 
 
 /***/ })

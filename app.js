@@ -25,7 +25,7 @@ const users = require('./routes/users');
 const music = require('./routes/music');
 
 // Port Number
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 // const port = 3000;
 
 // CORS stuff

@@ -12,7 +12,8 @@ const fs = require('fs');
 
 const client_id = "4220f98a90dd428cb79a258b78fbe43d";
 const client_secret = "f5abb23a14d442089620e296aa290186";
-const redirect_uri = "http://localhost:3000/music/callback";
+// const redirect_uri = "http://localhost:3000/music/callback";
+const redirect_uri = "http://studify.online/music/callback";
 
 var access_token = null;
 var refresh_token = null;
@@ -46,9 +47,19 @@ router.get('/userPlaylist', (req, res, next) => {
     
     // use the access token to access the Spotify Web API
     request.get(options, (error, response, body) => {
-        if (!error && response.statusCode === 200) {
-            console.log(body.items[0].name);
-            res.json(body);
+        if (!error && response.statusCode == 200) {
+            var itemsArray = body.items;
+            var playlistArray = [];
+
+            for (var i = 0 ; i < itemsArray.length; i++) {
+                var toAppend = { 
+                    "name" : itemsArray[i].name,
+                    "uri" : itemsArray[i].uri
+                }
+                playlistArray.push(toAppend);
+            }
+
+            res.json(playlistArray);
         } else {
             console.log(error);
             res.json({success : false});
