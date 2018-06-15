@@ -141,7 +141,8 @@ var appRoutes = [
     { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"] },
     { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_5__["LoginComponent"] },
     { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_8__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]] },
-    { path: 'music', component: _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__["MusicComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]] }
+    { path: 'music', component: _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__["MusicComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]] },
+    { path: 'convert', component: _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_17__["ConvertComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -195,7 +196,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  convert works!\n</p>\n"
+module.exports = "<div class=\"btn-group\">\n    <div class=\"dropdown\">\n        <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          Choose A Playlist to Convert\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n        </div>\n      </div>\n    <div class=\"dropdown\">\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderEffects}}\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n          <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n      </div>\n    </div>\n    <div class=\"dropdown\">\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            {{placeholderInstruments}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n            <a *ngFor=\"let theme of themes\" class=\"dropdown-item\" (click)=\"clickedTheme(theme)\">{{theme}}</a>\n        </div>\n      </div>\n  </div>\n  <hr>\n  <audio *ngIf=\"showRain\"  controls loop=\"true\">\n    <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n    <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \n  If you are reading this, your browser does not support the audio element.\n  </audio>\n  <audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n    <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n    <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \n  If you are reading this, your browser does not support the audio element.\n  </audio>\n"
 
 /***/ }),
 
@@ -210,6 +211,7 @@ module.exports = "<p>\n  convert works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConvertComponent", function() { return ConvertComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_music_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/music.service */ "./src/app/services/music.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -220,10 +222,41 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var ConvertComponent = /** @class */ (function () {
-    function ConvertComponent() {
+    function ConvertComponent(musicService) {
+        this.musicService = musicService;
+        this.placeholderEffects = "Choose Effects";
+        this.placeholderInstruments = "Choose Theme";
+        this.themes = ["Piano", "Guitar", "Cello", "Violin", "Vocal Covers"];
     }
     ConvertComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.musicService.getUserPlaylists().subscribe(function (data) {
+            console.log(data);
+            _this.playlists = data;
+        });
+    };
+    ConvertComponent.prototype.clickedRain = function () {
+        console.log("rain");
+        this.showRain = true;
+        this.showFireplace = false;
+        this.placeholderEffects = "Rain";
+    };
+    ConvertComponent.prototype.clickedFireplace = function () {
+        console.log("fireplace");
+        this.showRain = false;
+        this.showFireplace = true;
+        this.placeholderEffects = "Fireplace";
+    };
+    ConvertComponent.prototype.clickedTheme = function (theme) {
+        console.log(theme);
+        this.selectedTheme = theme;
+    };
+    ConvertComponent.prototype.onPlaylistSelect = function (playlist) {
+        console.log(playlist);
+        this.selected = playlist;
+        this.playlistSelected = true;
     };
     ConvertComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -231,7 +264,7 @@ var ConvertComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./convert.component.html */ "./src/app/components/convert/convert.component.html"),
             styles: [__webpack_require__(/*! ./convert.component.css */ "./src/app/components/convert/convert.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_music_service__WEBPACK_IMPORTED_MODULE_1__["MusicService"]])
     ], ConvertComponent);
     return ConvertComponent;
 }());
@@ -604,7 +637,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"user\">\n  <h2 class=\"page=header\">{{user.name}}</h2>\n  <ul class=\"list-group\"></ul>\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n</div>\n"
+module.exports = "<div *ngIf=\"user\">\n  <h2 class=\"page=header\">{{user.name}}</h2>\n  <ul class=\"list-group\"></ul>\n    <li class=\"list-group-item\">Username: {{user.username}}</li>\n    <li class=\"list-group-item\">Email: {{user.email}}</li>\n</div>"
 
 /***/ }),
 

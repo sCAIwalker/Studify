@@ -50,6 +50,7 @@ router.get('/userPlaylist', (req, res, next) => {
         if (!error && response.statusCode == 200) {
             var itemsArray = body.items;
             var playlistArray = [];
+            console.log(body);
 
             for (var i = 0 ; i < itemsArray.length; i++) {
                 var toAppend = { 

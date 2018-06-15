@@ -24,7 +24,8 @@ const appRoutes: Routes = [
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path:'music', component: MusicComponent, canActivate:[AuthGuard]}         
+  {path:'music', component: MusicComponent, canActivate:[AuthGuard]},
+  {path:'convert', component: ConvertComponent, canActivate:[AuthGuard]}       
 ];
 
 @NgModule({

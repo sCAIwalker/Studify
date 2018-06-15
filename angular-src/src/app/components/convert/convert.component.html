@@ -1,3 +1,38 @@
-<p>
-  convert works!
-</p>
+<div class="btn-group">
+    <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Choose A Playlist to Convert
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" *ngFor="let playlist of playlists" (click)="onPlaylistSelect(playlist)">{{playlist.name}}</a>
+        </div>
+      </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{placeholderEffects}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="clickedRain()">Rain</a>
+          <a class="dropdown-item" (click)="clickedFireplace()">Fireplace</a>    
+      </div>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{placeholderInstruments}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a *ngFor="let theme of themes" class="dropdown-item" (click)="clickedTheme(theme)">{{theme}}</a>
+        </div>
+      </div>
+  </div>
+  <hr>
+  <audio *ngIf="showRain"  controls loop="true">
+    <source src="/assets/thunderstorm.mp3" type="audio/mp3">
+    <source src="/assets/thunderstorm.mp3" type="audio/mpeg">    
+  If you are reading this, your browser does not support the audio element.
+  </audio>
+  <audio *ngIf="showFireplace"  controls loop="true">
+    <source src="/assets/fireplace.mp3" type="audio/mp3">
+    <source src="/assets/fireplace.mp3" type="audio/mpeg">    
+  If you are reading this, your browser does not support the audio element.
+  </audio>
