@@ -38,6 +38,7 @@ router.get('/test', (req, res, next) => {
 
 router.get('/userPlaylist', (req, res, next) => {
     console.log("user playlist");
+    console.log("hello");
     console.log(access_token);    
     var options = {
         url: 'https://api.spotify.com/v1/me/playlists',
