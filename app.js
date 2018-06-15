@@ -12,6 +12,7 @@ var global_access_token = "test";
 mongoose.connect(config.database);
 
 mongoose.connection.on('connected', () => {
+	console.log("v");
 	console.log("connected to database " + config.database);
 });
 
