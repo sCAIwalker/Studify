@@ -381,7 +381,7 @@ var LoginComponent = /** @class */ (function () {
                     cssClass: 'alert-success',
                     timeout: 5000
                 });
-                window.location.href = "http://localhost:3000/music/spotifyLogin";
+                window.location.href = "http://studify.online/music/spotifyLogin";
             }
             else {
                 _this.flashMessage.show(data.msg, {
