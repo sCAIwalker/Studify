@@ -381,7 +381,7 @@ var LoginComponent = /** @class */ (function () {
                     cssClass: 'alert-success',
                     timeout: 5000
                 });
-                window.location.href = "http://studify.online/music/spotifyLogin";
+                window.location.href = "http://localhost:3000/music/spotifyLogin";
             }
             else {
                 _this.flashMessage.show(data.msg, {
@@ -900,17 +900,17 @@ var AuthService = /** @class */ (function () {
             'Content-Type': 'application/json'
         });
         // 'http://localhost:3000/users/register'
-        return this.http.post('users/register', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('http://localhost:3000/users/register', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('users/authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.authenticateSpotifyAccount = function () {
         console.log("in auth.service");
-        return this.http.get('users/spotifyLogin');
+        return this.http.get('http://localhost:3000/users/spotifyLogin');
     };
     AuthService.prototype.getProfile = function () {
         this.loadToken();
@@ -919,7 +919,7 @@ var AuthService = /** @class */ (function () {
             'Authorization': this.authToken,
             'Content-Type': 'application/json'
         });
-        return this.http.get('users/profile', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.get('http://localhost:3000/users/profile', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.storeUserData = function (token, user) {
         localStorage.setItem('id_token', token);
@@ -986,7 +986,7 @@ var MusicService = /** @class */ (function () {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.get('music/userPlaylist', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.get('http://localhost:3000/music/userPlaylist', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     MusicService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
