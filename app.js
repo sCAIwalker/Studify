@@ -23,7 +23,6 @@ const app = express();
 
 const users = require('./routes/users');
 const music = require('./routes/music');
-const convert = require('./routes/convert');
 
 // Port Number
 // const port = process.env.PORT || 8080;
@@ -53,9 +52,6 @@ app.use('/users', users);
 
 //anything that is 3000/music/whatever will go to the music file
 app.use('/music', music);
-
-//anything that is 3000/convert/whatever will go to the convert file
-app.use('/convert', convert);
 
 // Home Page
 app.get('/', (req, res) => {

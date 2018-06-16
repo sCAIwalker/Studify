@@ -18,6 +18,7 @@ const redirect_uri = "http://localhost:3000/music/callback";
 var access_token = null;
 var refresh_token = null;
 var user_id = null;
+var currPlaylistNames = null;
 
 const generateRandomString = function(length) {
 	var text = '';
@@ -50,7 +51,8 @@ router.get('/userPlaylist', (req, res, next) => {
             for (var i = 0 ; i < itemsArray.length; i++) {
                 var toAppend = { 
                     "name" : itemsArray[i].name,
-                    "uri" : itemsArray[i].uri
+                    "uri" : itemsArray[i].uri,
+                    "id" : itemsArray[i].id
                 }
                 playlistArray.push(toAppend);
             }
@@ -126,7 +128,8 @@ router.get('/callback', function(req, res) {
             // use the access token to access the Spotify Web API
             request.get(options, function(error, response, body) {
                 console.log(body);
-                console.log(body.display_name);
+                user_id = body.id;
+                console.log(user_id);
             });
 
             // we can also pass the token to the browser to make requests from there
@@ -161,6 +164,38 @@ router.get('/refresh_token', function(req, res) {
             res.send({
                 'access_token': access_token
             });
+        }
+    });
+});
+
+router.post('/convert', (req, res, next) => {
+    console.log("inside convert");
+    console.log(req.body);
+    console.log(user_id);
+
+    var options = {
+        url: 'https://api.spotify.com/v1/users/' + user_id + "/playlists/" + req.body.id + "/tracks",
+        headers: { 'Authorization': 'Bearer ' + access_token },
+        json: true
+    }
+
+    request.get(options, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            var itemsArray = body.items;
+            var returnedArray = [];
+            for (var i = 0; i < itemsArray.length; i++) {
+                console.log(itemsArray[i].track.name);
+                var toAppend = {
+                    "name" : itemsArray[i].track.name
+                };
+
+                returnedArray.push(toAppend);
+            }
+            console.log(returnedArray);
+            res.json({success : true});
+        } else {
+            console.log(error);
+            res.json({success : false});
         }
     });
 });

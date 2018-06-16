@@ -16,10 +16,10 @@ export class MusicService {
     return this.http.get('http://localhost:3000/music/userPlaylist', {headers: headers}).pipe(map(res => res));
   }
   
-  getConvertedPlaylists() {
+  getConvertedPlaylists(playlist) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.get('http://localhost:3000/convert/test', {headers: headers}).pipe(map(res => res)); 
+    return this.http.post('http://localhost:3000/music/convert', playlist, {headers: headers}).pipe(map(res => res)); 
   }
 }

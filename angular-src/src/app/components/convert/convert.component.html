@@ -36,5 +36,5 @@
     <source src="/assets/fireplace.mp3" type="audio/mpeg">    
   If you are reading this, your browser does not support the audio element.
   </audio>
-  <button (click)="convert()">CONVERT!</button>
+  <button *ngIf="playlistSelected" class="btn btn-dark" (click)="convert()">Convert!</button>
   

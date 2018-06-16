@@ -52,7 +52,7 @@ export class ConvertComponent implements OnInit {
   }
 
   convert() {
-    this.musicService.getConvertedPlaylists().subscribe((data: any) => {
+    this.musicService.getConvertedPlaylists(this.selected).subscribe((data: any) => {
       console.log(data);
     });
   }
