@@ -65517,6 +65517,411 @@ exports.FlashMessagesModule = FlashMessagesModule;
 
 /***/ }),
 
+/***/ "./node_modules/ngx-youtube-player/esm5/ngx-youtube-player.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/ngx-youtube-player/esm5/ngx-youtube-player.js ***!
+  \********************************************************************/
+/*! exports provided: YoutubePlayerModule, ɵa, ɵb */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YoutubePlayerModule", function() { return YoutubePlayerModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return YoutubePlayerComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵb", function() { return YoutubePlayerService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/**
+ * @license ngx-youtube-library
+ * Copyright (c) 2018 Oren Farhi
+ * MIT license
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+ */
+
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @return {?}
+ */
+function win() {
+    return window;
+}
+/**
+ * @return {?}
+ */
+function YouTubeRef() {
+    return win()['YT'];
+}
+/**
+ * @return {?}
+ */
+function YouTubePlayerRef() {
+    return YouTubeRef().Player;
+}
+var defaultSizes = {
+    height: 270,
+    width: 367
+};
+var YoutubePlayerService = /** @class */ (function () {
+    function YoutubePlayerService(zone) {
+        this.zone = zone;
+        this.ytApiLoaded = false;
+        this.api = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.createApi();
+    }
+    /**
+     * @param {?} options
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.loadPlayerApi = /**
+     * @param {?} options
+     * @return {?}
+     */
+    function (options) {
+        var /** @type {?} */ doc = win().document;
+        if (!this.ytApiLoaded) {
+            this.ytApiLoaded = true;
+            var /** @type {?} */ playerApiScript = doc.createElement('script');
+            playerApiScript.type = 'text/javascript';
+            playerApiScript.src = options.protocol + "://www.youtube.com/iframe_api";
+            doc.body.appendChild(playerApiScript);
+        }
+    };
+    /**
+     * @param {?} elementId
+     * @param {?} outputs
+     * @param {?} sizes
+     * @param {?=} videoId
+     * @param {?=} playerVars
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.setupPlayer = /**
+     * @param {?} elementId
+     * @param {?} outputs
+     * @param {?} sizes
+     * @param {?=} videoId
+     * @param {?=} playerVars
+     * @return {?}
+     */
+    function (elementId, outputs, sizes, videoId, playerVars) {
+        var _this = this;
+        if (videoId === void 0) { videoId = ''; }
+        var /** @type {?} */ createPlayer = function () {
+            if (YouTubePlayerRef) {
+                _this.createPlayer(elementId, outputs, sizes, videoId, playerVars);
+            }
+        };
+        this.api.subscribe(createPlayer);
+    };
+    /**
+     * @param {?} player
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.play = /**
+     * @param {?} player
+     * @return {?}
+     */
+    function (player) {
+        player.playVideo();
+    };
+    /**
+     * @param {?} player
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.pause = /**
+     * @param {?} player
+     * @return {?}
+     */
+    function (player) {
+        player.pauseVideo();
+    };
+    /**
+     * @param {?} media
+     * @param {?} player
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.playVideo = /**
+     * @param {?} media
+     * @param {?} player
+     * @return {?}
+     */
+    function (media, player) {
+        var /** @type {?} */ id = media.id.videoId ? media.id.videoId : media.id;
+        player.loadVideoById(id);
+        this.play(player);
+    };
+    /**
+     * @param {?} player
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.isPlaying = /**
+     * @param {?} player
+     * @return {?}
+     */
+    function (player) {
+        // because YT is not loaded yet 1 is used - YT.PlayerState.PLAYING
+        var /** @type {?} */ isPlayerReady = player && player.getPlayerState;
+        var /** @type {?} */ playerState = isPlayerReady ? player.getPlayerState() : {};
+        var /** @type {?} */ isPlayerPlaying = isPlayerReady
+            ? playerState !== YouTubeRef().PlayerState.ENDED &&
+                playerState !== YouTubeRef().PlayerState.PAUSED
+            : false;
+        return isPlayerPlaying;
+    };
+    /**
+     * @param {?} elementId
+     * @param {?} outputs
+     * @param {?} sizes
+     * @param {?=} videoId
+     * @param {?=} playerVars
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.createPlayer = /**
+     * @param {?} elementId
+     * @param {?} outputs
+     * @param {?} sizes
+     * @param {?=} videoId
+     * @param {?=} playerVars
+     * @return {?}
+     */
+    function (elementId, outputs, sizes, videoId, playerVars) {
+        var _this = this;
+        if (videoId === void 0) { videoId = ''; }
+        if (playerVars === void 0) { playerVars = {}; }
+        var /** @type {?} */ playerSize = {
+            height: sizes.height || defaultSizes.height,
+            width: sizes.width || defaultSizes.width
+        };
+        var /** @type {?} */ ytPlayer = YouTubePlayerRef();
+        return new ytPlayer(elementId, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, playerSize, { events: {
+                onReady: function (ev) {
+                    _this.zone.run(function () { return outputs.ready && outputs.ready.next(ev.target); });
+                },
+                onStateChange: function (ev) {
+                    _this.zone.run(function () { return outputs.change && outputs.change.next(ev); });
+                }
+            }, playerVars: playerVars,
+            videoId: videoId }));
+    };
+    /**
+     * @param {?} player
+     * @param {?} isFullScreen
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.toggleFullScreen = /**
+     * @param {?} player
+     * @param {?} isFullScreen
+     * @return {?}
+     */
+    function (player, isFullScreen) {
+        var height = defaultSizes.height, width = defaultSizes.width;
+        if (!isFullScreen) {
+            height = window.innerHeight;
+            width = window.innerWidth;
+        }
+        player.setSize(width, height);
+    };
+    // adpoted from uid
+    /**
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.generateUniqueId = /**
+     * @return {?}
+     */
+    function () {
+        var /** @type {?} */ len = 7;
+        return Math.random()
+            .toString(35)
+            .substr(2, len);
+    };
+    /**
+     * @return {?}
+     */
+    YoutubePlayerService.prototype.createApi = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        var /** @type {?} */ onYouTubeIframeAPIReady = function () {
+            if (win()) {
+                _this.api.next(YouTubeRef());
+            }
+        };
+        win()['onYouTubeIframeAPIReady'] = onYouTubeIframeAPIReady;
+    };
+    YoutubePlayerService.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] },
+    ];
+    /** @nocollapse */
+    YoutubePlayerService.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], },
+    ]; };
+    return YoutubePlayerService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var YoutubePlayerComponent = /** @class */ (function () {
+    function YoutubePlayerComponent(playerService, elementRef, renderer) {
+        this.playerService = playerService;
+        this.elementRef = elementRef;
+        this.renderer = renderer;
+        this.videoId = '';
+        this.height = defaultSizes.height;
+        this.width = defaultSizes.width;
+        /**
+         * \@description sets the protocol by the navigator object
+         * if there is no window, it sets a default http protocol
+         * unless the protocol is set from outside
+         */
+        this.protocol = this.getProtocol();
+        this.playerVars = {};
+        // player created and initialized - sends instance of the player
+        this.ready = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        // state change: send the YT event with its state
+        this.change = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    /**
+     * @return {?}
+     */
+    YoutubePlayerComponent.prototype.ngAfterContentInit = /**
+     * @return {?}
+     */
+    function () {
+        var /** @type {?} */ htmlId = this.playerService.generateUniqueId();
+        var /** @type {?} */ playerSize = { height: this.height, width: this.width };
+        var /** @type {?} */ container = this.renderer.selectRootElement('#yt-player-ngx-component');
+        this.renderer.setAttribute(container, 'id', htmlId);
+        this.playerService.loadPlayerApi({
+            protocol: this.protocol
+        });
+        this.playerService.setupPlayer(htmlId, {
+            change: this.change,
+            ready: this.ready
+        }, playerSize, this.videoId, this.playerVars);
+    };
+    /**
+     * @return {?}
+     */
+    YoutubePlayerComponent.prototype.getProtocol = /**
+     * @return {?}
+     */
+    function () {
+        var /** @type {?} */ hasWindow = window && window.location;
+        var /** @type {?} */ protocol = hasWindow
+            ? window.location.protocol.replace(':', '')
+            : 'http';
+        return protocol;
+    };
+    YoutubePlayerComponent.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
+                    changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+                    selector: 'youtube-player',
+                    template: "\n    <div id=\"yt-player-ngx-component\"></div>\n  "
+                },] },
+    ];
+    /** @nocollapse */
+    YoutubePlayerComponent.ctorParameters = function () { return [
+        { type: YoutubePlayerService, },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"], },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Renderer2"], },
+    ]; };
+    YoutubePlayerComponent.propDecorators = {
+        "videoId": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
+        "height": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
+        "width": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
+        "protocol": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
+        "playerVars": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] },],
+        "ready": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
+        "change": [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] },],
+    };
+    return YoutubePlayerComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var YoutubePlayerModule = /** @class */ (function () {
+    function YoutubePlayerModule() {
+    }
+    YoutubePlayerModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{
+                    declarations: [
+                        YoutubePlayerComponent
+                    ],
+                    exports: [
+                        YoutubePlayerComponent
+                    ],
+                    imports: [
+                        _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]
+                    ],
+                    providers: [
+                        YoutubePlayerService
+                    ]
+                },] },
+    ];
+    return YoutubePlayerModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Angular library starter.
+ * Build an Angular library compatible with AoT compilation & Tree shaking.
+ * Copyright Roberto Simonetti.
+ * MIT license.
+ * https://github.com/robisim74/angular-library-starter
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+//# sourceMappingURL=ngx-youtube-player.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/querystring/decode.js":
 /*!********************************************!*\
   !*** ./node_modules/querystring/decode.js ***!

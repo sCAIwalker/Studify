@@ -111,12 +111,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_music_music_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/music/music.component */ "./src/app/components/music/music.component.ts");
 /* harmony import */ var _components_convert_convert_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/convert/convert.component */ "./src/app/components/convert/convert.component.ts");
 /* harmony import */ var _pipes_urlbypass_pipe__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./pipes/urlbypass.pipe */ "./src/app/pipes/urlbypass.pipe.ts");
+/* harmony import */ var ngx_youtube_player__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ngx-youtube-player */ "./node_modules/ngx-youtube-player/esm5/ngx-youtube-player.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -165,7 +167,8 @@ var AppModule = /** @class */ (function () {
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(appRoutes),
                 angular2_flash_messages__WEBPACK_IMPORTED_MODULE_13__["FlashMessagesModule"].forRoot(),
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"],
+                ngx_youtube_player__WEBPACK_IMPORTED_MODULE_19__["YoutubePlayerModule"]
             ],
             providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_10__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _services_music_service__WEBPACK_IMPORTED_MODULE_12__["MusicService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"], _pipes_urlbypass_pipe__WEBPACK_IMPORTED_MODULE_18__["UrlbypassPipe"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -196,7 +199,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <div class=\"dropdown\">\n        <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderPlaylists}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n        </div>\n      </div>\n    <div *ngIf=\"playlistSelected\" class=\"dropdown\">\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderEffects}}\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n          <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n      </div>\n    </div>\n    <div *ngIf=\"selected\" class=\"dropdown\">\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            {{placeholderInstruments}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n            <a *ngFor=\"let theme of themes\" class=\"dropdown-item\" (click)=\"clickedTheme(theme)\">{{theme}}</a>\n        </div>\n      </div>\n  </div>\n  <hr>\n  <div>\n    <audio *ngIf=\"showRain\"  controls loop=\"true\">\n      <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n      <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \n    If you are reading this, your browser does not support the audio element.\n    </audio>\n    <audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n      <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n      <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \n    If you are reading this, your browser does not support the audio element.\n    </audio>\n  </div>\n  <hr>\n  <div>\n    <button *ngIf=\"selected\" class=\"btn btn-dark\" (click)=\"convert()\">Convert!</button>\n  </div>\n  <ul *ngIf=\"playlistSelected\" class=\"list-group\">\n    <li *ngFor=\"let song of songsToConvert; let i = index\" (click)=\"onSongSelect(song, i)\" [class.active]=\"i == selectedRow\" class=\"list-group-item\">{{song.name}}</li>\n  </ul>\n  \n"
+module.exports = "<div class=\"btn-group\">\n    <div class=\"dropdown\">\n        <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderPlaylists}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n        </div>\n      </div>\n    <div *ngIf=\"playlistSelected\" class=\"dropdown\">\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderEffects}}\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n          <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n      </div>\n    </div>\n    <div *ngIf=\"selected\" class=\"dropdown\">\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            {{placeholderInstruments}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n            <a *ngFor=\"let theme of themes\" class=\"dropdown-item\" (click)=\"clickedTheme(theme)\">{{theme}}</a>\n        </div>\n      </div>\n  </div>\n  <hr>\n  <div>\n    <audio *ngIf=\"showRain\"  controls loop=\"true\">\n      <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n      <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \n    If you are reading this, your browser does not support the audio element.\n    </audio>\n    <audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n      <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n      <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \n    If you are reading this, your browser does not support the audio element.\n    </audio>\n  </div>\n  <hr>\n  <div>\n    <button *ngIf=\"selected\" class=\"btn btn-dark\" (click)=\"convert()\">Convert!</button>\n  </div>\n  <ul *ngIf=\"playlistSelected\" class=\"list-group\">\n    <li *ngFor=\"let song of songsToConvert; let i = index\" (click)=\"onSongSelect(song, i)\" [class.active]=\"i == selectedRow\" class=\"list-group-item\">{{song.name}}</li>\n  </ul>\n  <youtube-player\n  [width]=\"1\"\n  [height]=\"1\"\n  [videoId]=\"id\"\n  (ready)=\"savePlayer($event)\"\n  (change)=\"onStateChange($event)\"\n></youtube-player>\n\n<div class=\"col-md-12\">\n  <div class=\"btn-group\" role=\"group\">\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"playVideo()\">Play</button>\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"pauseVideo()\">Pause</button>\n  </div>\n</div>\n  \n"
 
 /***/ }),
 
@@ -230,6 +233,7 @@ var ConvertComponent = /** @class */ (function () {
         this.placeholderInstruments = "Choose Theme";
         this.placeholderPlaylists = "Choose Playlist";
         this.themes = ["Piano", "Guitar", "Cello", "Violin", "Vocal Covers"];
+        this.id = 'rMrXgKbKssw';
     }
     ConvertComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -273,6 +277,19 @@ var ConvertComponent = /** @class */ (function () {
     ConvertComponent.prototype.onSongSelect = function (song, index) {
         console.log(song.name);
         this.selectedRow = index;
+    };
+    ConvertComponent.prototype.savePlayer = function (player) {
+        this.player = player;
+        console.log('player instance', player);
+    };
+    ConvertComponent.prototype.onStateChange = function (event) {
+        this.ytEvent = event.data;
+    };
+    ConvertComponent.prototype.playVideo = function () {
+        this.player.playVideo();
+    };
+    ConvertComponent.prototype.pauseVideo = function () {
+        this.player.pauseVideo();
     };
     ConvertComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

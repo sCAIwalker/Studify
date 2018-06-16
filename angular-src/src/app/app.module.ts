@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MusicComponent } from './components/music/music.component';
 import { ConvertComponent } from './components/convert/convert.component';
 import { UrlbypassPipe } from './pipes/urlbypass.pipe';
+import { YoutubePlayerModule } from 'ngx-youtube-player';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot(),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    YoutubePlayerModule
   ],
   providers: [ValidateService, AuthService, MusicService, AuthGuard, UrlbypassPipe],
   bootstrap: [AppComponent]

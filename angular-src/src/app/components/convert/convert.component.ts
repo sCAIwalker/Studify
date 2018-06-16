@@ -20,6 +20,10 @@ export class ConvertComponent implements OnInit {
   songsToConvert : any;
   selectedRow : Number;
 
+  player: YT.Player;
+  private ytEvent;
+  private id: string = 'rMrXgKbKssw';
+
   constructor(private musicService: MusicService) { }
 
   ngOnInit() {
@@ -68,5 +72,22 @@ export class ConvertComponent implements OnInit {
   onSongSelect(song, index) {
     console.log(song.name);
     this.selectedRow = index;
+  }
+
+  savePlayer(player) {
+    this.player = player;
+    console.log('player instance', player);
+  }
+
+  onStateChange(event) {
+    this.ytEvent = event.data;
+  }
+
+  playVideo() {
+    this.player.playVideo();
+  }
+  
+  pauseVideo() {
+    this.player.pauseVideo();
   }
 }
