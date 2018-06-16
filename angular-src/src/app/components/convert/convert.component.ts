@@ -12,7 +12,7 @@ export class ConvertComponent implements OnInit {
   playlists : any;
   showRain : boolean;
   showFireplace : boolean;
-  themes = ["Piano", "Guitar", "Cello", "Violin", "Vocal Covers"];
+  themes : any = ["Piano", "Guitar", "Cello", "Violin", "Vocal Covers"];
   selectedTheme : string;
   selected : any;
   playlistSelected : any;
@@ -49,5 +49,11 @@ export class ConvertComponent implements OnInit {
     console.log(playlist);
     this.selected = playlist;
     this.playlistSelected = true;
+  }
+
+  convert() {
+    this.musicService.getConvertedPlaylists().subscribe((data: any) => {
+      console.log(data);
+    });
   }
 }

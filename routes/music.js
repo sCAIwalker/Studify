@@ -17,7 +17,7 @@ const redirect_uri = "http://localhost:3000/music/callback";
 
 var access_token = null;
 var refresh_token = null;
-var  user_id = null;
+var user_id = null;
 
 const generateRandomString = function(length) {
 	var text = '';
@@ -30,11 +30,6 @@ const generateRandomString = function(length) {
   };
   
 const stateKey = 'spotify_auth_state';
-
-router.get('/test', (req, res, next) => {
-    console.log(test);
-    console.log(test.next);
-});
 
 router.get('/userPlaylist', (req, res, next) => {
     console.log("user playlist");
@@ -120,7 +115,7 @@ router.get('/callback', function(req, res) {
             access_token = body.access_token
             refresh_token = body.refresh_token;
             
-            // console.log(access_token);
+            console.log(access_token);
 
             var options = {
                 url: 'https://api.spotify.com/v1/me',
