@@ -196,7 +196,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group\">\n    <div class=\"dropdown\">\n        <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          Choose A Playlist to Convert\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n        </div>\n      </div>\n    <div class=\"dropdown\">\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderEffects}}\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n          <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n      </div>\n    </div>\n    <div class=\"dropdown\">\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            {{placeholderInstruments}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n            <a *ngFor=\"let theme of themes\" class=\"dropdown-item\" (click)=\"clickedTheme(theme)\">{{theme}}</a>\n        </div>\n      </div>\n  </div>\n  <hr>\n  <audio *ngIf=\"showRain\"  controls loop=\"true\">\n    <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n    <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \n  If you are reading this, your browser does not support the audio element.\n  </audio>\n  <audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n    <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n    <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \n  If you are reading this, your browser does not support the audio element.\n  </audio>\n  <button *ngIf=\"playlistSelected\" class=\"btn btn-dark\" (click)=\"convert()\">Convert!</button>\n  \n"
+module.exports = "<div class=\"btn-group\">\n    <div class=\"dropdown\">\n        <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderPlaylists}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n        </div>\n      </div>\n    <div *ngIf=\"playlistSelected\" class=\"dropdown\">\n      <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n          {{placeholderEffects}}\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n          <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n          <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n      </div>\n    </div>\n    <div *ngIf=\"selected\" class=\"dropdown\">\n        <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            {{placeholderInstruments}}\n        </button>\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n            <a *ngFor=\"let theme of themes\" class=\"dropdown-item\" (click)=\"clickedTheme(theme)\">{{theme}}</a>\n        </div>\n      </div>\n  </div>\n  <hr>\n  <div>\n    <audio *ngIf=\"showRain\"  controls loop=\"true\">\n      <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n      <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \n    If you are reading this, your browser does not support the audio element.\n    </audio>\n    <audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n      <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n      <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \n    If you are reading this, your browser does not support the audio element.\n    </audio>\n  </div>\n  <hr>\n  <div>\n    <button *ngIf=\"selected\" class=\"btn btn-dark\" (click)=\"convert()\">Convert!</button>\n  </div>\n  <ul *ngIf=\"playlistSelected\" class=\"list-group\">\n    <li *ngFor=\"let song of songsToConvert; let i = index\" (click)=\"onSongSelect(song, i)\" [class.active]=\"i == selectedRow\" class=\"list-group-item\">{{song.name}}</li>\n  </ul>\n  \n"
 
 /***/ }),
 
@@ -228,6 +228,7 @@ var ConvertComponent = /** @class */ (function () {
         this.musicService = musicService;
         this.placeholderEffects = "Choose Effects";
         this.placeholderInstruments = "Choose Theme";
+        this.placeholderPlaylists = "Choose Playlist";
         this.themes = ["Piano", "Guitar", "Cello", "Violin", "Vocal Covers"];
     }
     ConvertComponent.prototype.ngOnInit = function () {
@@ -252,16 +253,26 @@ var ConvertComponent = /** @class */ (function () {
     ConvertComponent.prototype.clickedTheme = function (theme) {
         console.log(theme);
         this.selectedTheme = theme;
+        this.placeholderInstruments = theme;
     };
     ConvertComponent.prototype.onPlaylistSelect = function (playlist) {
         console.log(playlist);
         this.selected = playlist;
-        this.playlistSelected = true;
+        this.placeholderPlaylists = playlist.name;
     };
     ConvertComponent.prototype.convert = function () {
+        var _this = this;
+        this.selected["theme"] = this.selectedTheme;
+        console.log(this.selected);
         this.musicService.getConvertedPlaylists(this.selected).subscribe(function (data) {
-            console.log(data);
+            _this.songsToConvert = data;
+            _this.playlistSelected = true;
+            console.log(_this.songsToConvert);
         });
+    };
+    ConvertComponent.prototype.onSongSelect = function (song, index) {
+        console.log(song.name);
+        this.selectedRow = index;
     };
     ConvertComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({

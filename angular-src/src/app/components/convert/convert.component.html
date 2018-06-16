@@ -1,13 +1,13 @@
 <div class="btn-group">
     <div class="dropdown">
         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Choose A Playlist to Convert
+          {{placeholderPlaylists}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" *ngFor="let playlist of playlists" (click)="onPlaylistSelect(playlist)">{{playlist.name}}</a>
         </div>
       </div>
-    <div class="dropdown">
+    <div *ngIf="playlistSelected" class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{placeholderEffects}}
       </button>
@@ -16,7 +16,7 @@
           <a class="dropdown-item" (click)="clickedFireplace()">Fireplace</a>    
       </div>
     </div>
-    <div class="dropdown">
+    <div *ngIf="selected" class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{placeholderInstruments}}
         </button>
@@ -26,15 +26,23 @@
       </div>
   </div>
   <hr>
-  <audio *ngIf="showRain"  controls loop="true">
-    <source src="/assets/thunderstorm.mp3" type="audio/mp3">
-    <source src="/assets/thunderstorm.mp3" type="audio/mpeg">    
-  If you are reading this, your browser does not support the audio element.
-  </audio>
-  <audio *ngIf="showFireplace"  controls loop="true">
-    <source src="/assets/fireplace.mp3" type="audio/mp3">
-    <source src="/assets/fireplace.mp3" type="audio/mpeg">    
-  If you are reading this, your browser does not support the audio element.
-  </audio>
-  <button *ngIf="playlistSelected" class="btn btn-dark" (click)="convert()">Convert!</button>
+  <div>
+    <audio *ngIf="showRain"  controls loop="true">
+      <source src="/assets/thunderstorm.mp3" type="audio/mp3">
+      <source src="/assets/thunderstorm.mp3" type="audio/mpeg">    
+    If you are reading this, your browser does not support the audio element.
+    </audio>
+    <audio *ngIf="showFireplace"  controls loop="true">
+      <source src="/assets/fireplace.mp3" type="audio/mp3">
+      <source src="/assets/fireplace.mp3" type="audio/mpeg">    
+    If you are reading this, your browser does not support the audio element.
+    </audio>
+  </div>
+  <hr>
+  <div>
+    <button *ngIf="selected" class="btn btn-dark" (click)="convert()">Convert!</button>
+  </div>
+  <ul *ngIf="playlistSelected" class="list-group">
+    <li *ngFor="let song of songsToConvert; let i = index" (click)="onSongSelect(song, i)" [class.active]="i == selectedRow" class="list-group-item">{{song.name}}</li>
+  </ul>
   

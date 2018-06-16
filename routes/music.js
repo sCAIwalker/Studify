@@ -171,6 +171,7 @@ router.get('/refresh_token', function(req, res) {
 router.post('/convert', (req, res, next) => {
     console.log("inside convert");
     console.log(req.body);
+    console.log(req.body.theme);
     console.log(user_id);
 
     var options = {
@@ -184,15 +185,13 @@ router.post('/convert', (req, res, next) => {
             var itemsArray = body.items;
             var returnedArray = [];
             for (var i = 0; i < itemsArray.length; i++) {
-                console.log(itemsArray[i].track.name);
                 var toAppend = {
                     "name" : itemsArray[i].track.name
                 };
 
                 returnedArray.push(toAppend);
             }
-            console.log(returnedArray);
-            res.json({success : true});
+            res.json(returnedArray);
         } else {
             console.log(error);
             res.json({success : false});

@@ -9,6 +9,7 @@ import { MusicService } from '../../services/music.service';
 export class ConvertComponent implements OnInit {
   placeholderEffects : string = "Choose Effects";
   placeholderInstruments : string = "Choose Theme";
+  placeholderPlaylists : string = "Choose Playlist";
   playlists : any;
   showRain : boolean;
   showFireplace : boolean;
@@ -16,6 +17,8 @@ export class ConvertComponent implements OnInit {
   selectedTheme : string;
   selected : any;
   playlistSelected : any;
+  songsToConvert : any;
+  selectedRow : Number;
 
   constructor(private musicService: MusicService) { }
 
@@ -43,17 +46,27 @@ export class ConvertComponent implements OnInit {
   clickedTheme(theme) {
     console.log(theme);
     this.selectedTheme = theme;
+    this.placeholderInstruments = theme
   }
 
   onPlaylistSelect(playlist) {
     console.log(playlist);
     this.selected = playlist;
-    this.playlistSelected = true;
+    this.placeholderPlaylists = playlist.name;
   }
 
   convert() {
+    this.selected["theme"] = this.selectedTheme;
+    console.log(this.selected);
     this.musicService.getConvertedPlaylists(this.selected).subscribe((data: any) => {
-      console.log(data);
+      this.songsToConvert = data;
+      this.playlistSelected = true;
+      console.log(this.songsToConvert);
     });
+  }
+
+  onSongSelect(song, index) {
+    console.log(song.name);
+    this.selectedRow = index;
   }
 }
