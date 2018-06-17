@@ -39,9 +39,6 @@
     </audio>
   </div>
   <hr>
-  <div>
-    <button *ngIf="selected" class="btn btn-dark" (click)="convert()">Convert!</button>
-  </div>
   <ul *ngIf="playlistSelected" class="list-group">
     <li *ngFor="let song of songsToConvert; let i = index" (click)="onSongSelect(song, i)" [class.active]="i == selectedRow" class="list-group-item">{{song.name}}</li>
   </ul>
@@ -52,11 +49,4 @@
   (ready)="savePlayer($event)"
   (change)="onStateChange($event)"
 ></youtube-player>
-
-<div class="col-md-12">
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default" (click)="playVideo()">Play</button>
-    <button type="button" class="btn btn-default" (click)="pauseVideo()">Pause</button>
-  </div>
-</div>
   

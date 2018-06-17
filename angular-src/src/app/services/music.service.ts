@@ -22,4 +22,11 @@ export class MusicService {
     });
     return this.http.post('http://localhost:3000/music/convert', playlist, {headers: headers}).pipe(map(res => res)); 
   }
+
+  getConvertedID(song) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post('http://localhost:3000/music/id', song, {headers: headers}).pipe(map(res => res)); 
+  }
 }

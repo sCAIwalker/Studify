@@ -10,6 +10,7 @@ const cors = require('cors');
 var request = require('request');
 const fs = require('fs');
 
+const ytAPIkey = "AIzaSyBUkFxmkgYI-lDeVQFxM-uoLYUDNK6gNwE";
 const client_id = "4220f98a90dd428cb79a258b78fbe43d";
 const client_secret = "f5abb23a14d442089620e296aa290186";
 const redirect_uri = "http://localhost:3000/music/callback";
@@ -192,6 +193,34 @@ router.post('/convert', (req, res, next) => {
                 returnedArray.push(toAppend);
             }
             res.json(returnedArray);
+        } else {
+            console.log(error);
+            res.json({success : false});
+        }
+    });
+});
+
+router.post('/id', (req, res, next) => {
+    console.log("inside convert id");
+
+    var songName = encodeURIComponent(req.body.name + " " + req.body.theme + " cover");
+    console.log(songName);
+    var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=relevance&q=" + songName + "&type=video&videoEmbeddable=true&key=" + ytAPIkey;
+ 
+    var options = {
+        url: url,
+        json: true
+    }
+
+    request.get(options, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            itemsArray = body.items;
+            resultsArray = [];
+            for (var i = 0; i < itemsArray.length; i++) {
+                resultsArray.push(itemsArray[i].id);
+            }
+            console.log(resultsArray);
+            res.json(resultsArray);
         } else {
             console.log(error);
             res.json({success : false});

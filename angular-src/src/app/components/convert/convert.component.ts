@@ -22,7 +22,7 @@ export class ConvertComponent implements OnInit {
 
   player: YT.Player;
   private ytEvent;
-  private id: string = 'rMrXgKbKssw';
+  private id: string;
 
   constructor(private musicService: MusicService) { }
 
@@ -57,11 +57,6 @@ export class ConvertComponent implements OnInit {
     console.log(playlist);
     this.selected = playlist;
     this.placeholderPlaylists = playlist.name;
-  }
-
-  convert() {
-    this.selected["theme"] = this.selectedTheme;
-    console.log(this.selected);
     this.musicService.getConvertedPlaylists(this.selected).subscribe((data: any) => {
       this.songsToConvert = data;
       this.playlistSelected = true;
@@ -69,9 +64,23 @@ export class ConvertComponent implements OnInit {
     });
   }
 
+  convert() {
+    this.selected["theme"] = this.selectedTheme;
+    console.log(this.selected);
+  }
+
   onSongSelect(song, index) {
     console.log(song.name);
     this.selectedRow = index;
+    song["theme"] = this.selectedTheme;
+    this.musicService.getConvertedID(song).subscribe((data: any) => {
+      this.id = data[0].videoId;
+      console.log(this.id);
+      console.log(this.player);
+      this.player.loadVideoById(this.id); //loads the video and plays it.
+      // this.player.curVideoById(this.id); loads the video but doesn't play it.
+      // this.player.playVideo();
+    });
   }
 
   savePlayer(player) {
@@ -81,13 +90,5 @@ export class ConvertComponent implements OnInit {
 
   onStateChange(event) {
     this.ytEvent = event.data;
-  }
-
-  playVideo() {
-    this.player.playVideo();
-  }
-  
-  pauseVideo() {
-    this.player.pauseVideo();
   }
 }
