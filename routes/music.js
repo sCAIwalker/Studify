@@ -13,8 +13,8 @@ const fs = require('fs');
 const ytAPIkey = "AIzaSyBUkFxmkgYI-lDeVQFxM-uoLYUDNK6gNwE";
 const client_id = "4220f98a90dd428cb79a258b78fbe43d";
 const client_secret = "f5abb23a14d442089620e296aa290186";
-const redirect_uri = "http://localhost:3000/music/callback";
-// const redirect_uri = "http://www.studify.online/music/callback";
+// const redirect_uri = "http://localhost:3000/music/callback";
+const redirect_uri = "http://www.studify.online/music/callback";
 
 var access_token = null;
 var refresh_token = null;
