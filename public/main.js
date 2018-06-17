@@ -975,7 +975,7 @@ var AuthService = /** @class */ (function () {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('users/authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.authenticateSpotifyAccount = function () {
         console.log("in auth.service");

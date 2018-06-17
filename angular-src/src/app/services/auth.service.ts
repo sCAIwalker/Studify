@@ -26,7 +26,7 @@ export class AuthService {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post('authenticate', user, {headers: headers}).pipe(map(res => res));
+    return this.http.post('users/authenticate', user, {headers: headers}).pipe(map(res => res));
   }
 
   authenticateSpotifyAccount() {
