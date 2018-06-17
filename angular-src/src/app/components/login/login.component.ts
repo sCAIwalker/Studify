@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
-  }
+  }            
 
   onLoginSubmit() {
     const user = {
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.flashMessage.show("You are now logged in!", {
           cssClass: 'alert-success', 
           timeout: 5000});
-          window.location.href="http://studify.online/music/spotifyLogin";
+          window.location.href="http://localhost:3000/music/spotifyLogin";
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger', 

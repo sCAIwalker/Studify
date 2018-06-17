@@ -10,14 +10,16 @@ const cors = require('cors');
 var request = require('request');
 const fs = require('fs');
 
+const ytAPIkey = "AIzaSyBUkFxmkgYI-lDeVQFxM-uoLYUDNK6gNwE";
 const client_id = "4220f98a90dd428cb79a258b78fbe43d";
 const client_secret = "f5abb23a14d442089620e296aa290186";
-// const redirect_uri = "http://localhost:3000/music/callback";
-const redirect_uri = "http://www.studify.online/music/callback";
+const redirect_uri = "http://localhost:3000/music/callback";
+// const redirect_uri = "http://www.studify.online/music/callback";
 
 var access_token = null;
 var refresh_token = null;
-var  user_id = null;
+var user_id = null;
+var currPlaylistNames = null;
 
 const generateRandomString = function(length) {
 	var text = '';
@@ -30,11 +32,6 @@ const generateRandomString = function(length) {
   };
   
 const stateKey = 'spotify_auth_state';
-
-router.get('/test', (req, res, next) => {
-    console.log(test);
-    console.log(test.next);
-});
 
 router.get('/userPlaylist', (req, res, next) => {
     console.log("user playlist");
@@ -51,11 +48,13 @@ router.get('/userPlaylist', (req, res, next) => {
         if (!error && response.statusCode == 200) {
             var itemsArray = body.items;
             var playlistArray = [];
+            console.log(body);
 
             for (var i = 0 ; i < itemsArray.length; i++) {
                 var toAppend = { 
                     "name" : itemsArray[i].name,
-                    "uri" : itemsArray[i].uri
+                    "uri" : itemsArray[i].uri,
+                    "id" : itemsArray[i].id
                 }
                 playlistArray.push(toAppend);
             }
@@ -120,7 +119,7 @@ router.get('/callback', function(req, res) {
             access_token = body.access_token
             refresh_token = body.refresh_token;
             
-            // console.log(access_token);
+            console.log(access_token);
 
             var options = {
                 url: 'https://api.spotify.com/v1/me',
@@ -131,7 +130,8 @@ router.get('/callback', function(req, res) {
             // use the access token to access the Spotify Web API
             request.get(options, function(error, response, body) {
                 console.log(body);
-                console.log(body.display_name);
+                user_id = body.id;
+                console.log(user_id);
             });
 
             // we can also pass the token to the browser to make requests from there
@@ -166,6 +166,65 @@ router.get('/refresh_token', function(req, res) {
             res.send({
                 'access_token': access_token
             });
+        }
+    });
+});
+
+router.post('/convert', (req, res, next) => {
+    console.log("inside convert");
+    console.log(req.body);
+    console.log(req.body.theme);
+    console.log(user_id);
+
+    var options = {
+        url: 'https://api.spotify.com/v1/users/' + user_id + "/playlists/" + req.body.id + "/tracks",
+        headers: { 'Authorization': 'Bearer ' + access_token },
+        json: true
+    }
+
+    request.get(options, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            var itemsArray = body.items;
+            var returnedArray = [];
+            for (var i = 0; i < itemsArray.length; i++) {
+                var toAppend = {
+                    "name" : itemsArray[i].track.name
+                };
+
+                returnedArray.push(toAppend);
+            }
+            res.json(returnedArray);
+        } else {
+            console.log(error);
+            res.json({success : false});
+        }
+    });
+});
+
+router.post('/id', (req, res, next) => {
+    console.log("inside convert id");
+
+    var songName = encodeURIComponent(req.body.name + " " + req.body.theme + " cover");
+    console.log(songName);
+    var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=relevance&q=" + songName + "&type=video&videoEmbeddable=true&key=" + ytAPIkey;
+ 
+    var options = {
+        url: url,
+        json: true
+    }
+
+    request.get(options, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            itemsArray = body.items;
+            resultsArray = [];
+            for (var i = 0; i < itemsArray.length; i++) {
+                resultsArray.push(itemsArray[i].id);
+            }
+            console.log(resultsArray);
+            res.json(resultsArray);
+        } else {
+            console.log(error);
+            res.json({success : false});
         }
     });
 });

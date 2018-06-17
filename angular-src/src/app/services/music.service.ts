@@ -13,7 +13,20 @@ export class MusicService {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.get('music/userPlaylist', {headers: headers}).pipe(map(res => res));
+    return this.http.get('http://localhost:3000/music/userPlaylist', {headers: headers}).pipe(map(res => res));
   }
   
+  getConvertedPlaylists(playlist) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post('http://localhost:3000/music/convert', playlist, {headers: headers}).pipe(map(res => res)); 
+  }
+
+  getConvertedID(song) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post('http://localhost:3000/music/id', song, {headers: headers}).pipe(map(res => res)); 
+  }
 }
