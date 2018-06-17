@@ -450,7 +450,7 @@ var LoginComponent = /** @class */ (function () {
                     cssClass: 'alert-success',
                     timeout: 5000
                 });
-                window.location.href = "http://localhost:3000/music/spotifyLogin";
+                window.location.href = "http://www.studify.online/music/spotifyLogin";
             }
             else {
                 _this.flashMessage.show(data.msg, {
@@ -494,7 +494,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<iframe *ngIf=\"playlistSelected\" [src]=\"embedURI\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe><div class=\"dropdown\">\n  <!-- <button *ngIf=\"!playlistDisplayed\" (click)=\"displayPlaylist()\" class=\"btn btn-success\">Choose Your Playlist</button> -->\n  <!-- <ul *ngIf=\"playlistDisplayed\" class=\"list-group\">\n      <li *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\" class=\"list-group-item\">{{playlist.name}}</li>\n  </ul> -->\n<div class=\"btn-group\">\n  <div class=\"dropdown\">\n      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        Choose Your Playlist\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n      </div>\n    </div>\n  <div class=\"dropdown\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        {{placeholder}}\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n        <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n    </div>\n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n"
+module.exports = "<iframe *ngIf=\"playlistSelected\" [src]=\"embedURI\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe><div class=\"dropdown\">\n  <!-- <button *ngIf=\"!playlistDisplayed\" (clicnk)=\"displayPlaylist()\" class=\"btn btn-success\">Choose Your Playlist</button> -->\n  <!-- <ul *ngIf=\"playlistDisplayed\" class=\"list-group\">\n      <li *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\" class=\"list-group-item\">{{playlist.name}}</li>\n  </ul> -->\n<div class=\"btn-group\">\n  <div class=\"dropdown\">\n      <button class=\"btn btn-success dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        Choose Your Playlist\n      </button>\n      <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <a class=\"dropdown-item\" *ngFor=\"let playlist of playlists\" (click)=\"onPlaylistSelect(playlist)\">{{playlist.name}}</a>\n      </div>\n    </div>\n  <div class=\"dropdown\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n        {{placeholder}}\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n        <a class=\"dropdown-item\" (click)=\"clickedRain()\">Rain</a>\n        <a class=\"dropdown-item\" (click)=\"clickedFireplace()\">Fireplace</a>    \n    </div>\n  </div>\n</div>\n<hr>\n<audio *ngIf=\"showRain\"  controls loop=\"true\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/thunderstorm.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n<audio *ngIf=\"showFireplace\"  controls loop=\"true\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mp3\">\n  <source src=\"/assets/fireplace.mp3\" type=\"audio/mpeg\">    \nIf you are reading this, your browser does not support the audio element.\n</audio>\n"
 
 /***/ }),
 
@@ -969,17 +969,17 @@ var AuthService = /** @class */ (function () {
             'Content-Type': 'application/json'
         });
         // 'http://localhost:3000/users/register'
-        return this.http.post('http://localhost:3000/users/register', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('users/register', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('authenticate', user, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.authenticateSpotifyAccount = function () {
         console.log("in auth.service");
-        return this.http.get('http://localhost:3000/users/spotifyLogin');
+        return this.http.get('users/spotifyLogin');
     };
     AuthService.prototype.getProfile = function () {
         this.loadToken();
@@ -988,7 +988,7 @@ var AuthService = /** @class */ (function () {
             'Authorization': this.authToken,
             'Content-Type': 'application/json'
         });
-        return this.http.get('http://localhost:3000/users/profile', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.get('users/profile', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     AuthService.prototype.storeUserData = function (token, user) {
         localStorage.setItem('id_token', token);
@@ -1055,19 +1055,19 @@ var MusicService = /** @class */ (function () {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.get('http://localhost:3000/music/userPlaylist', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.get('music/userPlaylist', { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     MusicService.prototype.getConvertedPlaylists = function (playlist) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('http://localhost:3000/music/convert', playlist, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('music/convert', playlist, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     MusicService.prototype.getConvertedID = function (song) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
-        return this.http.post('http://localhost:3000/music/id', song, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
+        return this.http.post('music/id', song, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res; }));
     };
     MusicService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
