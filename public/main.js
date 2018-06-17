@@ -215,6 +215,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConvertComponent", function() { return ConvertComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_music_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/music.service */ "./src/app/services/music.service.ts");
+/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
+/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -226,9 +228,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var ConvertComponent = /** @class */ (function () {
-    function ConvertComponent(musicService) {
+    function ConvertComponent(musicService, flashMessage) {
         this.musicService = musicService;
+        this.flashMessage = flashMessage;
         this.placeholderEffects = "Choose Effects";
         this.placeholderInstruments = "Choose Theme";
         this.placeholderPlaylists = "Choose Playlist";
@@ -275,17 +279,23 @@ var ConvertComponent = /** @class */ (function () {
     };
     ConvertComponent.prototype.onSongSelect = function (song, index) {
         var _this = this;
-        console.log(song.name);
-        this.selectedRow = index;
-        song["theme"] = this.selectedTheme;
-        this.musicService.getConvertedID(song).subscribe(function (data) {
-            _this.id = data[0].videoId;
-            console.log(_this.id);
-            console.log(_this.player);
-            _this.player.loadVideoById(_this.id); //loads the video and plays it.
-            // this.player.curVideoById(this.id); loads the video but doesn't play it.
-            // this.player.playVideo();
-        });
+        console.log(this.selectedTheme == undefined);
+        if (this.selectedTheme == undefined) {
+            this.flashMessage.show("You must select a theme to convert your song.", { cssClass: 'alert-danger', timeout: 3000 });
+        }
+        else {
+            console.log(song.name);
+            this.selectedRow = index;
+            song["theme"] = this.selectedTheme;
+            this.musicService.getConvertedID(song).subscribe(function (data) {
+                _this.id = data[0].videoId;
+                console.log(_this.id);
+                console.log(_this.player);
+                _this.player.loadVideoById(_this.id); //loads the video and plays it.
+                // this.player.curVideoById(this.id); loads the video but doesn't play it.
+                // this.player.playVideo();
+            });
+        }
     };
     ConvertComponent.prototype.savePlayer = function (player) {
         this.player = player;
@@ -300,7 +310,7 @@ var ConvertComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./convert.component.html */ "./src/app/components/convert/convert.component.html"),
             styles: [__webpack_require__(/*! ./convert.component.css */ "./src/app/components/convert/convert.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_music_service__WEBPACK_IMPORTED_MODULE_1__["MusicService"]])
+        __metadata("design:paramtypes", [_services_music_service__WEBPACK_IMPORTED_MODULE_1__["MusicService"], angular2_flash_messages__WEBPACK_IMPORTED_MODULE_2__["FlashMessagesService"]])
     ], ConvertComponent);
     return ConvertComponent;
 }());

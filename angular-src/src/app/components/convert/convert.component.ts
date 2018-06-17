@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicService } from '../../services/music.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-convert',
@@ -24,7 +25,7 @@ export class ConvertComponent implements OnInit {
   private ytEvent;
   private id: string;
 
-  constructor(private musicService: MusicService) { }
+  constructor(private musicService: MusicService, private flashMessage : FlashMessagesService) { }
 
   ngOnInit() {
     this.musicService.getUserPlaylists().subscribe((data: any) => {
@@ -70,17 +71,22 @@ export class ConvertComponent implements OnInit {
   }
 
   onSongSelect(song, index) {
-    console.log(song.name);
-    this.selectedRow = index;
-    song["theme"] = this.selectedTheme;
-    this.musicService.getConvertedID(song).subscribe((data: any) => {
-      this.id = data[0].videoId;
-      console.log(this.id);
-      console.log(this.player);
-      this.player.loadVideoById(this.id); //loads the video and plays it.
-      // this.player.curVideoById(this.id); loads the video but doesn't play it.
-      // this.player.playVideo();
-    });
+    console.log(this.selectedTheme == undefined);
+    if (this.selectedTheme == undefined) {
+      this.flashMessage.show("You must select a theme to convert your song.", {cssClass: 'alert-danger', timeout: 3000});      
+    } else {
+      console.log(song.name);
+      this.selectedRow = index;
+      song["theme"] = this.selectedTheme;
+      this.musicService.getConvertedID(song).subscribe((data: any) => {
+        this.id = data[0].videoId;
+        console.log(this.id);
+        console.log(this.player);
+        this.player.loadVideoById(this.id); //loads the video and plays it.
+        // this.player.curVideoById(this.id); loads the video but doesn't play it.
+        // this.player.playVideo();
+      });
+    }
   }
 
   savePlayer(player) {
