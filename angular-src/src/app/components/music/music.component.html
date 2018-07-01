@@ -1,11 +1,14 @@
+<div class="text-center">
+<hr>
 <iframe *ngIf="playlistSelected" [src]="embedURI" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><div class="dropdown">
   <!-- <button *ngIf="!playlistDisplayed" (click)="displayPlaylist()" class="btn btn-success">Choose Your Playlist</button> -->
   <!-- <ul *ngIf="playlistDisplayed" class="list-group">
       <li *ngFor="let playlist of playlists" (click)="onPlaylistSelect(playlist)" class="list-group-item">{{playlist.name}}</li>
   </ul> -->
+
 <div class="btn-group">
-  <div class="dropdown">
-      <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div class="dropdown" align="center">
+      <button class="btn btn-success btn-round-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Choose Your Playlist
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -13,7 +16,7 @@
       </div>
     </div>
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary btn-round-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{placeholder}}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -33,3 +36,4 @@ If you are reading this, your browser does not support the audio element.
   <source src="/assets/fireplace.mp3" type="audio/mpeg">    
 If you are reading this, your browser does not support the audio element.
 </audio>
+</div>
