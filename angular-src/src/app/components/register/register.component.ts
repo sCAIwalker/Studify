@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -34,23 +35,35 @@ export class RegisterComponent implements OnInit {
 
     // Required Fields
     if(!this.validateService.validateRegister(user)) {
-      this.flashMessage.show("Please fill in all fields", {cssClass: 'alert-danger', timeout: 3000});
+      swal({
+        type : "error",
+        title : "Please fill in all the fields."
+      }); 
       return false;
     }
 
     // Validate Email
     if(!this.validateService.validateEmail(user.email)) {
-      this.flashMessage.show("Please use a valid email", {cssClass: 'alert-danger', timeout: 3000});
+      swal({
+        type : "error",
+        title : "Please use a valid email."
+      }); 
       return false;
     }
 
     //Register User
     this.authService.registerUser(user).subscribe((data: any)=> {
       if (data.success) {
-        this.flashMessage.show("You are now registered and can log in.", {cssClass: 'alert-success', timeout: 3000});
+        swal({
+          type : "success",
+          title : "You are registered and can now login!"
+        }); 
         this.router.navigate(['/login']);
       } else{
-        this.flashMessage.show("Something went wrong,", {cssClass: 'alert-danger', timeout: 3000});
+        swal({
+          type : "error",
+          title : "An error occurred."
+        }); 
         this.router.navigate(['/register']);
       }
     });

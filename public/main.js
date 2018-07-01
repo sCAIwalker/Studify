@@ -337,7 +337,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron text-center\">\n  <h1>Studify</h1>\n    <p class=\"lead\">Welcome to Studify</p>\n    <div>\n      Create and account to get Started!\n    </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Playlist Conversion</h3>\n    <p>Convert your spotify playlist to a playlist without instrumentals when you're not feeling the lyrics!</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Background Effects</h3>\n    <p>Add a crackling fire or peaceful rainfall to the backdrop of your music to set the mood!</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Playlist Generation</h3>\n    <p>Getting bored with your current playlist? We'll generate a playlist for you at the click of a button!</p>\n  </div>  \n</div>"
+module.exports = "<div class=\"jumbotron text-center\">\n  <h1>Studify</h1>\n    <p class=\"lead\">Welcome to Studify by Kevin Cai</p>\n    <div>\n      Create an account to get started!\n    </div>\n</div>\n\n<div class=\"row\">\n  <div class=\"col-md-4\">\n    <h3>Playlist Conversion</h3>\n    <p>Convert your spotify playlist to a playlist without instrumentals for studying when you feel that lyrics are distracting!</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Background Effects</h3>\n    <p>Add a crackling fire or peaceful rainfall to the backdrop of your music to set the mood!</p>\n  </div>\n  <div class=\"col-md-4\">\n    <h3>Playlist Generation (In Progress)</h3>\n    <p>Getting bored with your current playlist? We'll generate a playlist for you at the click of a button!</p>\n  </div>  \n</div>"
 
 /***/ }),
 
@@ -425,6 +425,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -434,6 +436,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -456,16 +459,18 @@ var LoginComponent = /** @class */ (function () {
             if (data.success) {
                 console.log(data);
                 _this.authService.storeUserData(data.token, data.user);
-                _this.flashMessage.show("You are now logged in!", {
-                    cssClass: 'alert-success',
-                    timeout: 5000
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()({
+                    type: "success",
+                    title: "You have successfully logged in!"
                 });
-                window.location.href = "http://localhost:3000/music/spotifyLogin";
+                setTimeout(function () {
+                    window.location.href = "http://localhost:3000/music/spotifyLogin";
+                }, 750);
             }
             else {
-                _this.flashMessage.show(data.msg, {
-                    cssClass: 'alert-danger',
-                    timeout: 5000
+                sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()({
+                    type: "error",
+                    title: "Invalid username or password."
                 });
                 _this.router.navigate(['login']);
             }
@@ -780,6 +785,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
 /* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -789,6 +796,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -814,22 +822,34 @@ var RegisterComponent = /** @class */ (function () {
         };
         // Required Fields
         if (!this.validateService.validateRegister(user)) {
-            this.flashMessage.show("Please fill in all fields", { cssClass: 'alert-danger', timeout: 3000 });
+            sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()({
+                type: "error",
+                title: "Please fill in all the fields."
+            });
             return false;
         }
         // Validate Email
         if (!this.validateService.validateEmail(user.email)) {
-            this.flashMessage.show("Please use a valid email", { cssClass: 'alert-danger', timeout: 3000 });
+            sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()({
+                type: "error",
+                title: "Please use a valid email."
+            });
             return false;
         }
         //Register User
         this.authService.registerUser(user).subscribe(function (data) {
             if (data.success) {
-                _this.flashMessage.show("You are now registered and can log in.", { cssClass: 'alert-success', timeout: 3000 });
+                sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()({
+                    type: "success",
+                    title: "You are registered and can now login!"
+                });
                 _this.router.navigate(['/login']);
             }
             else {
-                _this.flashMessage.show("Something went wrong,", { cssClass: 'alert-danger', timeout: 3000 });
+                sweetalert2__WEBPACK_IMPORTED_MODULE_5___default()({
+                    type: "error",
+                    title: "An error occurred."
+                });
                 _this.router.navigate(['/register']);
             }
         });
